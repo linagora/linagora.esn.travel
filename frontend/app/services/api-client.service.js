@@ -3,10 +3,11 @@
 
   angular.module('linagora.esn.travel').factory('travelApiClient', travelApiClient);
 
-  function travelApiClient($q, session, travelRestangular) {
+  function travelApiClient($q, travelRestangular) {
     return {
       get: get,
       list: list,
+      listTasks: listTasks,
       create: create,
       getProjects: getProjects,
       approveRequestByBoard: approveRequestByBoard,
@@ -26,6 +27,10 @@
 
     function list(options) {
       return travelRestangular.all('travel-request').getList(options).then(_pluck);
+    }
+
+    function listTasks() {
+      return travelRestangular.all('travel-request').all('tasks').getList().then(_pluck);
     }
 
     function getProjects() {

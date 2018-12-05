@@ -4,6 +4,7 @@ module.exports = dependencies => {
   return {
     get,
     list,
+    listTasks,
     create,
     managerApproval,
     boardApproval,
@@ -14,6 +15,10 @@ module.exports = dependencies => {
 
   function list(req, res) {
     client.list().then(travels => res.status(200).json(travels));
+  }
+
+  function listTasks(req, res) {
+    client.listTasks().then(tasks => res.status(200).json(tasks));
   }
 
   function create(req, res) {

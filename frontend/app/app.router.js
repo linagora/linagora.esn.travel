@@ -31,6 +31,14 @@
               templateUrl: MODULE_DIR_NAME + '/app/home/travel-main.html'
             }
           }
+        })
+        .state('travel.tasks', {
+          url: '/tasks',
+          views: {
+            'main@travel': {
+              template: '<travel-tasks/>'
+            }
+          }
         });
     });
 })();

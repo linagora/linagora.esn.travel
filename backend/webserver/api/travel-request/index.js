@@ -10,6 +10,11 @@ module.exports = function(dependencies, lib, router) {
     middleware.canGet,
     controller.list);
 
+  router.get('/travel-request/tasks',
+    authorizationMW.requiresAPILogin,
+    middleware.canGet,
+    controller.listTasks);
+
   router.post('/travel-request',
     authorizationMW.requiresAPILogin,
     controller.create);
