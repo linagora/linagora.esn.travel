@@ -55,7 +55,7 @@
 
     function onCreateBtnClick() {
       $modal({
-        templateUrl: '/group/app/create/create.html',
+        templateUrl: '/linagora.esn.travel/app/create/create.html',
         backdrop: 'static',
         placement: 'center',
         controllerAs: '$ctrl',
