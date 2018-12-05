@@ -5,7 +5,7 @@ const Dependency = AwesomeModule.AwesomeModuleDependency;
 const path = require('path');
 const glob = require('glob-all');
 const FRONTEND_JS_PATH = __dirname + '/frontend/app/';
-const AWESOME_MODULE_NAME = 'linagora.esn.seed';
+const AWESOME_MODULE_NAME = 'linagora.esn.travel';
 
 const awesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
   dependencies: [

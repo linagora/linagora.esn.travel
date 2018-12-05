@@ -4,13 +4,13 @@
 
 var expect = chai.expect;
 
-describe('the seedHomeController', function() {
+describe('the travelHomeController', function() {
 
   var $rootScope, $scope, $controller;
 
   beforeEach(function() {
 
-    angular.mock.module('linagora.esn.seed');
+    angular.mock.module('linagora.esn.travel');
 
     angular.mock.inject(function(_$rootScope_, _$controller_) {
       $rootScope = _$rootScope_;
@@ -21,7 +21,7 @@ describe('the seedHomeController', function() {
 
   function initController() {
     var bindings = {},
-      controller = $controller('seedHomeController',
+      controller = $controller('travelHomeController',
         {
           $scope: $scope
         },
@@ -36,7 +36,7 @@ describe('the seedHomeController', function() {
     it('should set $scope.message on init', function() {
       var ctrl = initController();
 
-      expect(ctrl.message).to.equal('Seed home!');
+      expect(ctrl.message).to.equal('Travel home!');
     });
   });
 });

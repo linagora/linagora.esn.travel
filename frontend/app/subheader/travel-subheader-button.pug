@@ -1,0 +1,8 @@
+button.btn.btn-link.travel-button(ng-click= "ctrl.travelClick()", ng-disabled= "ctrl.travelDisabled", ng-switch = "ctrl.travelIconPosition")
+  .travel-button-icon-and-text(ng-switch-when= "right")
+    span {{ ctrl.travelIconText | translate }}
+    i.mdi(ng-class= "ctrl.travelIconClass")
+
+  .travel-button-icon-and-text(ng-switch-default)
+    i.mdi(ng-class= "ctrl.travelIconClass")
+    span {{ ctrl.travelIconText | translate }}

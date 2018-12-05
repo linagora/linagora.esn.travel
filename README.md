@@ -1,6 +1,6 @@
-# linagora.esn.seed
+# linagora.esn.travel
 
-Seed module as basis to create other modules
+Travel module
 
 ## Install
 
@@ -11,7 +11,7 @@ While waiting for a npm-based dependency injection handler, you have to install 
 **1. Clone**
 
 ```bash
-git clone https://ci.linagora.com/linagora/lgs/openpaas/linagora.esn.seed.git
+git clone https://ci.linagora.com/linagora/lgs/openpaas/linagora.esn.travel.git
 ```
 
 **2. Install it in OpenPaaS**
@@ -23,7 +23,7 @@ There is two way to install the model in OpenPaaS, so choose one of them:
   The modules must be available in the `$ESN/modules` folder:
 
   ```bash
-  ln -s path_to_module/linagora.esn.seed $ESN/modules/
+  ln -s path_to_module/linagora.esn.travel $ESN/modules/
   ```
 - B. _Using npm link_
 
@@ -37,7 +37,7 @@ There is two way to install the model in OpenPaaS, so choose one of them:
 
   ```bash
   cd $ESN
-  npm link linagora.esn.seed
+  npm link linagora.esn.travel
   npm install
   ```
 
@@ -50,7 +50,7 @@ Copy the 'modules' array from `$ESN/config/default.json` into `$ESN/config/defau
 "modules": [
   "linagora.esn.core.webserver",
   "linagora.esn.core.wsserver",
-  "linagora.esn.seed"
+  "linagora.esn.travel"
 ],
 ```
 

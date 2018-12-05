@@ -1,37 +1,37 @@
 (function() {
   'use strict';
 
-  var MODULE_NAME = 'linagora.esn.seed';
-  var MODULE_DIR_NAME = '/linagora.esn.seed';
+  var MODULE_NAME = 'linagora.esn.travel';
+  var MODULE_DIR_NAME = '/linagora.esn.travel';
 
   angular.module(MODULE_NAME)
 
     .config(function($stateProvider) {
       $stateProvider
-        .state('example', {
-          url: '/example',
+        .state('travel', {
+          url: '/travel',
           views: {
             '': {
-              templateUrl: MODULE_DIR_NAME + '/app/home/seed-home.html'
+              templateUrl: MODULE_DIR_NAME + '/app/home/travel-home.html'
             },
-            'sidebar@example': {
-              templateUrl: MODULE_DIR_NAME + '/app/home/seed-sidebar.html'
+            'sidebar@travel': {
+              templateUrl: MODULE_DIR_NAME + '/app/home/travel-sidebar.html'
             }
           },
           deepStateRedirect: {
-            default: 'example.home',
+            default: 'travel.home',
             fn: function() {
-              return { state: 'example.home' };
+              return { state: 'travel.home' };
             }
           }
         })
-        .state('example.home', {
+        .state('travel.home', {
           url: '/home',
-          controller: 'seedHomeController',
+          controller: 'travelHomeController',
           controllerAs: 'ctrl',
           views: {
-            'main@example': {
-              templateUrl: MODULE_DIR_NAME + '/app/home/seed-main.html'
+            'main@travel': {
+              templateUrl: MODULE_DIR_NAME + '/app/home/travel-main.html'
             }
           }
         });
