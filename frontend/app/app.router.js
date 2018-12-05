@@ -13,9 +13,6 @@
           views: {
             '': {
               templateUrl: MODULE_DIR_NAME + '/app/home/travel-home.html'
-            },
-            'sidebar@travel': {
-              templateUrl: MODULE_DIR_NAME + '/app/home/travel-sidebar.html'
             }
           },
           deepStateRedirect: {
