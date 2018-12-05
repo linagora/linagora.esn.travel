@@ -1,10 +1,11 @@
-.card.fadeIn200ms
+.fadeIn200ms
   infinite-list(load-more-elements='$ctrl.loadMoreElements()', scroll-inside-container="$ctrl.scrollInsideContainer")
-    .listview.lv-bordered.lv-lg(ng-if="$ctrl.elements.length > 0")
-      .lv-body
-        travel-list-item.lv-item.p-0.clickable(travel='travel', on-delete-btn-click="$ctrl.deletetravel(travel)", ng-repeat="travel in $ctrl.elements")
+    .card(ng-if="$ctrl.elements.length > 0")
+      .listview.lv-bordered.lv-lg
+        .lv-body
+          travel-list-item.lv-item.p-0.clickable(travel='travel', on-delete-btn-click="$ctrl.deletetravel(travel)", ng-repeat="travel in $ctrl.elements")
 .empty-message(ng-if="!$ctrl.elements.length && $ctrl.infiniteScrollCompleted")
-  img(src="/travel/images/travel-icon.svg")
+  i.mdi.mdi-airplane
   .message
     | #{__('No travel')}
 div(ng-if='$ctrl.infiniteScrollDisabled')

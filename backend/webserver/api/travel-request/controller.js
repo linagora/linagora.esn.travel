@@ -1,7 +1,6 @@
-'use strict';
+module.exports = dependencies => {
+  const client = require('../../../lib/apiClient')(dependencies);
 
-// arguments: dependencies, lib
-module.exports = function() {
   return {
     get,
     list,
@@ -14,11 +13,20 @@ module.exports = function() {
   };
 
   function list(req, res) {
-    return res.status(200).json([]);
+    client.list().then(travels => res.status(200).json(travels));
   }
 
   function create(req, res) {
-    return res.status(200).json({});
+    const travel = req.body;
+
+    travel.traveller = req.user.preferredEmail;
+    travel['has-road-transport'] = !!travel.road;
+    travel['project-id'] = travel.projectId;
+    travel['start-date'] = travel.start;
+    travel['end-date'] = travel.end;
+
+    //travel.enquirer = // manager
+    client.create(travel).then(created => res.status(201).json(created));
   }
 
   function managerApproval(req, res) {
