@@ -3,8 +3,9 @@
 
   angular.module('linagora.esn.travel').factory('travelApiClient', travelApiClient);
 
-  function travelApiClient($q, session) {
+  function travelApiClient($q, session, travelRestangular) {
     return {
+      get: get,
       list: list,
       create: create,
       getProjects: getProjects,
@@ -15,12 +16,16 @@
       transfertTickets: transfertTickets
     };
 
+    function _pluck(response) {
+      return response.data;
+    }
+
+    function get(id) {
+      return travelRestangular.one('travel-requests', id).get();
+    }
+
     function list(options) {
-      return $q.when([{
-        id: 1,
-        name: 'SICTIAM Training',
-        enquirer: session.user.preferredEmail
-      }]);
+      return travelRestangular.all('travel-request').getList(options).then(_pluck);
     }
 
     function getProjects() {
@@ -37,27 +42,32 @@
     }
 
     function create(travel) {
-      return $q.when();
+      return travelRestangular.all('travel-request').post(travel).then(_pluck);
     }
 
     function approveRequestByManager(travel) {
-      return $q.when(true);
+      return travelRestangular.one('travel-request', travel.id)
+        .all('manager-approval').customPOST().then(_pluck);
     }
 
     function approveRequestByBoard(travel) {
-      return $q.when(true);
+      return travelRestangular.one('travel-request', travel.id)
+        .all('board-approval').customPOST().then(_pluck);
     }
 
     function bookTickets(travel) {
-      return $q.when(true);
+      return travelRestangular.one('travel-request', travel.id)
+        .all('travelling-tickets').customPOST().then(_pluck);
     }
 
     function transfertTickets(travel) {
-      return $q.when(true);
+      return travelRestangular.one('travel-request', travel.id)
+        .all('travelling-tickets').customPOST().then(_pluck);
     }
 
     function bookHotel(travel) {
-      return $q.when(true);
+      return travelRestangular.one('travel-request', travel.id)
+        .all('hotel').customPOST().then(_pluck);
     }
 
   }
