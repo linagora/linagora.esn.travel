@@ -7,7 +7,12 @@
     return {
       list: list,
       create: create,
-      getProjects: getProjects
+      getProjects: getProjects,
+      approveRequestByBoard: approveRequestByBoard,
+      approveRequestByManager: approveRequestByManager,
+      bookHotel: bookHotel,
+      bookTickets: bookTickets,
+      transfertTickets: transfertTickets
     };
 
     function list(options) {
@@ -32,8 +37,28 @@
     }
 
     function create(travel) {
-      console.log('Creating travel request', travel);
       return $q.when();
     }
+
+    function approveRequestByManager(travel) {
+      return $q.when(true);
+    }
+
+    function approveRequestByBoard(travel) {
+      return $q.when(true);
+    }
+
+    function bookTickets(travel) {
+      return $q.when(true);
+    }
+
+    function transfertTickets(travel) {
+      return $q.when(true);
+    }
+
+    function bookHotel(travel) {
+      return $q.when(true);
+    }
+
   }
 })(angular);
