@@ -1,12 +1,9 @@
-(function() {
+(function(angular) {
   'use strict';
 
-  var MODULE_NAME = 'linagora.esn.travel';
-
-  angular.module(MODULE_NAME)
+  angular.module('linagora.esn.travel')
          .controller('travelHomeController', travelHomeController);
 
-   function travelHomeController() {
-     this.message = 'Travel home!';
-    }
-})();
+  function travelHomeController() {
+  }
+})(angular);
