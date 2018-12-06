@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.travel')
 
-  .component('travelListItem', {
+  .component('travelTaskItem', {
     templateUrl: '/linagora.esn.travel/app/tasks/item/item.html',
     bindings: {
       task: '<'
