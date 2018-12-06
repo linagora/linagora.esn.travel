@@ -2,4 +2,12 @@ sub-header
   travel-subheader
 
 .travel-main-content
-  travel-list
+  .travel-tabs
+    ul.esn-tab
+      li.btn-wave(ui-sref-active="active")
+        a(href="", ui-sref="travel.home.requests", ui-sref-opts="{location: 'replace'}")
+          | #{__('My Requests')}
+      li.btn-wave(ui-sref-active="active")
+        a(href="", ui-sref="travel.home.tasks", ui-sref-opts="{location: 'replace'}")
+          | #{__('Tasks')}
+  .ui-view(name="tab")

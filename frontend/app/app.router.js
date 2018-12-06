@@ -5,7 +5,6 @@
   var MODULE_DIR_NAME = '/linagora.esn.travel';
 
   angular.module(MODULE_NAME)
-
     .config(function($stateProvider) {
       $stateProvider
         .state('travel', {
@@ -16,14 +15,14 @@
             }
           },
           deepStateRedirect: {
-            default: 'travel.home',
+            default: 'travel.home.requests',
             fn: function() {
-              return { state: 'travel.home' };
+              return { state: 'travel.home.requests' };
             }
           }
         })
         .state('travel.home', {
-          url: '/home',
+          url: '',
           controller: 'travelHomeController',
           controllerAs: 'ctrl',
           views: {
@@ -32,10 +31,18 @@
             }
           }
         })
-        .state('travel.tasks', {
+        .state('travel.home.requests', {
+          url: '/requests',
+          views: {
+            'tab@travel.home': {
+              template: '<travel-list/>'
+            }
+          }
+        })
+        .state('travel.home.tasks', {
           url: '/tasks',
           views: {
-            'main@travel': {
+            'tab@travel.home': {
               template: '<travel-tasks/>'
             }
           }
