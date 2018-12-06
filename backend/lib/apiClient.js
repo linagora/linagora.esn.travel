@@ -90,12 +90,15 @@ module.exports = dependencies => {
   return {
     create,
     list,
-    listTasks
+    listTasks,
+    managerApproval,
+    boardApproval,
+    bookHotel,
+    bookTickets,
+    transfertTickets
   };
 
   function create(travel) {
-    //travels.push(travel);
-
     return Promise.resolve(travel);
   }
 
@@ -105,5 +108,25 @@ module.exports = dependencies => {
 
   function listTasks() {
     return Promise.resolve(tasks['travel-requests']['travel-request']);
+  }
+
+  function managerApproval(approval) {
+    return Promise.resolve(approval);
+  }
+
+  function boardApproval(approval) {
+    return Promise.resolve(approval);
+  }
+
+  function bookHotel(book) {
+    return Promise.resolve(book);
+  }
+
+  function bookTickets(book) {
+    return Promise.resolve(book);
+  }
+
+  function transfertTickets(tickets) {
+    return Promise.resolve(tickets);
   }
 };

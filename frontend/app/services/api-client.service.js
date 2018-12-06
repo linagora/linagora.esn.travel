@@ -50,28 +50,32 @@
       return travelRestangular.all('travel-request').post(travel).then(_pluck);
     }
 
-    function approveRequestByManager(travel) {
-      return travelRestangular.one('travel-request', travel.id)
-        .all('manager-approval').customPOST().then(_pluck);
+    function approveRequestByManager(id, approval) {
+      return travelRestangular.one('travel-request', id)
+        .all('manager-approval').customPOST({
+          approval: approval
+        }).then(_pluck);
     }
 
-    function approveRequestByBoard(travel) {
-      return travelRestangular.one('travel-request', travel.id)
-        .all('board-approval').customPOST().then(_pluck);
+    function approveRequestByBoard(id, approval) {
+      return travelRestangular.one('travel-request', id)
+        .all('board-approval').customPOST({
+          approval: approval
+        }).then(_pluck);
     }
 
-    function bookTickets(travel) {
-      return travelRestangular.one('travel-request', travel.id)
+    function bookTickets(id) {
+      return travelRestangular.one('travel-request', id)
         .all('travelling-tickets').customPOST().then(_pluck);
     }
 
-    function transfertTickets(travel) {
-      return travelRestangular.one('travel-request', travel.id)
+    function transfertTickets(id) {
+      return travelRestangular.one('travel-request', id)
         .all('travelling-tickets').customPOST().then(_pluck);
     }
 
-    function bookHotel(travel) {
-      return travelRestangular.one('travel-request', travel.id)
+    function bookHotel(id) {
+      return travelRestangular.one('travel-request', id)
         .all('hotel').customPOST().then(_pluck);
     }
 

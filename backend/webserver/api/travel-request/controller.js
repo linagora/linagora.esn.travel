@@ -31,27 +31,101 @@ module.exports = dependencies => {
     travel['end-date'] = travel.end;
 
     //travel.enquirer = // manager
-    client.create(travel).then(created => res.status(201).json(created));
+    client.create(travel)
+      .then(created => res.status(201).json(created))
+      .catch(err => {
+        res.status(500).json({
+          error: {
+            code: 500,
+            reason: err.message
+          }
+        });
+      });
   }
 
   function managerApproval(req, res) {
-    return res.status(200).json({});
+    const approval = req.body;
+
+    approval['approved-by'] = req.user.preferredEmail;
+
+    client.managerApproval(approval)
+      .then(() => res.status(202).send())
+      .catch(err => {
+        res.status(500).json({
+          error: {
+            code: 500,
+            reason: err.message
+          }
+        });
+      });
   }
 
   function boardApproval(req, res) {
-    return res.status(200).json({});
+    const approval = req.body;
+
+    approval['approved-by'] = req.user.preferredEmail;
+
+    client.boardApproval(approval)
+      .then(() => res.status(202).send())
+      .catch(err => {
+        res.status(500).json({
+          error: {
+            code: 500,
+            reason: err.message
+          }
+        });
+      });
   }
 
   function bookHotel(req, res) {
-    return res.status(200).json({});
+    const book = {
+      'booked-by': req.user.preferredEmail
+    };
+
+    client.bookHotel(book)
+      .then(() => res.status(202).send())
+      .catch(err => {
+        res.status(500).json({
+          error: {
+            code: 500,
+            reason: err.message
+          }
+        });
+      });
   }
 
   function bookTickets(req, res) {
-    return res.status(200).json({});
+    const book = {
+      'booked-by': req.user.preferredEmail
+    };
+
+    client.bookTickets(book)
+      .then(() => res.status(202).send())
+      .catch(err => {
+        res.status(500).json({
+          error: {
+            code: 500,
+            reason: err.message
+          }
+        });
+      });
   }
 
   function transfertTickets(req, res) {
-    return res.status(200).json({});
+    const book = {
+      'transmitted-by': req.user.preferredEmail
+    };
+
+    client.transfertTickets(book)
+      .then(() => res.status(202).send())
+      .catch(err => {
+        res.status(500).json({
+          error: {
+            code: 500,
+            reason: err.message
+          }
+        });
+      });
   }
 
   function get(req, res) {

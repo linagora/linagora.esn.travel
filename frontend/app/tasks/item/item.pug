@@ -1,4 +1,4 @@
-.row.flex-vertical-centered(ng-click="")
+.row.flex-vertical-centered(ng-click="$ctrl.onTaskClick()")
   .avatar
     esn-avatar(user-email="::$ctrl.task.enquirer")
   .col-xs-4.lv-title
@@ -8,18 +8,26 @@
       | {{::$ctrl.task.enquirer}}
   .col-xs-2.lv-title
     .current-step(ng-if="$ctrl.task['current-step'] === 'manager-validation'")
-      span.type.label.label-primary #{__('Under Management Validation')}
+      span.type.label.label-primary #{__('Under management validation')}
     .current-step(ng-if="$ctrl.task['current-step'] === 'board-validation'")
-      span.type.label.label-primary #{__('Under Board Validation')}
+      span.type.label.label-primary #{__('Under board validation')}
     .current-step(ng-if="$ctrl.task['current-step'] === 'transportBooking'")
       span.type.label.label-primary #{__('Booking transport')}
     .current-step(ng-if="$ctrl.task['current-step'] === 'transmitTravellingTickets'")
-      span.type.label.label-primary #{__('Transmit Travelling Tickets')}
+      span.type.label.label-primary #{__('Transmit travelling tickets')}
     .current-step(ng-if="$ctrl.task['current-step'] === 'hotelBooking'")
-      span.type.label.label-primary #{__('Needs Hotel Booking')}
+      span.type.label.label-primary #{__('Needs hotel booking')}
 .lv-actions.actions
   a(href="", data-toggle="dropdown", aria-expanded="false")
     i.mdi.mdi-dots-vertical
   ul.dropdown-menu.dropdown-menu-right
-    li
-      a(href="", ng-click="$ctrl.approve()") #{__('Approve')}
+    li(ng-if="$ctrl.task['current-step'] === 'manager-validation'")
+      a(href="", ng-click="$ctrl.managerValidation()") #{__('Validate')}
+    li(ng-if="$ctrl.task['current-step'] === 'board-validation'")
+      a(href="", ng-click="$ctrl.boardValidation()") #{__('Validate')}
+    li(ng-if="$ctrl.task['current-step'] === 'transportBooking'")
+      a(href="", ng-click="$ctrl.bookTransport()") #{__('Book transport')}
+    li(ng-if="$ctrl.task['current-step'] === 'transmitTravellingTickets'")
+      a(href="", ng-click="$ctrl.transmitTravellingTickets()") #{__('Transmit tickets')}
+    li(ng-if="$ctrl.task['current-step'] === 'hotelBooking'")
+      a(href="", ng-click="$ctrl.bookHotel()") #{__('Book hotel')}
