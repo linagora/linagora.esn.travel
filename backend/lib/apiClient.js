@@ -21,14 +21,16 @@ const travels = {
 
 const tasks = {
   'travel-requests': {
-    'travel-request': {
-      'request-id': '222',
-      'project-id': '14592-05',
-      enquirer: 'bescudie@linagora.com',
-      'start-date': '2018-11-19T00:00:00.000+01:00',
-      'end-date': '2018-11-22T00:00:00.000+01:00',
-      'current-step': 'manager-validation'
-    }
+    'travel-request': [
+      {
+        'request-id': '222',
+        'project-id': '14592-05',
+        enquirer: 'bescudie@linagora.com',
+        'start-date': '2018-11-19T00:00:00.000+01:00',
+        'end-date': '2018-11-22T00:00:00.000+01:00',
+        'current-step': 'manager-validation'
+      }
+    ]
   }
 };
 
