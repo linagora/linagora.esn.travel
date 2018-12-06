@@ -1,14 +1,25 @@
-.row.flex-vertical-centered(ui-sref=".display({ travelId: $ctrl.task.id })")
-  .col-md-4.col-xs-6.lv-title
-    h5.ellipsis(title="{{::$ctrl.task.name}}") {{::$ctrl.task.name}}
-  .col-md-5.col-xs-5.ellipsis
+.row.flex-vertical-centered(ng-click="")
+  .avatar
+    esn-avatar(user-email="::$ctrl.task.enquirer")
+  .col-xs-4.lv-title
+    h5.ellipsis &#35;{{::$ctrl.task["request-id"]}} - {{::$ctrl.task["project-id"]}}
+  .col-xs-4.ellipsis
     a(ng-href='mailto:{{::$ctrl.task.enquirer}}', op-inbox-compose, title="{{::$ctrl.task.enquirer}}")
       | {{::$ctrl.task.enquirer}}
-  .col-md-3.hidden-xs.lv-title
-    span #{__('Accepted/Refused/...')}
+  .col-xs-2.lv-title
+    .current-step(ng-if="$ctrl.task['current-step'] === 'manager-validation'")
+      span.type.label.label-primary #{__('Under Management Validation')}
+    .current-step(ng-if="$ctrl.task['current-step'] === 'board-validation'")
+      span.type.label.label-primary #{__('Under Board Validation')}
+    .current-step(ng-if="$ctrl.task['current-step'] === 'transportBooking'")
+      span.type.label.label-primary #{__('Booking transport')}
+    .current-step(ng-if="$ctrl.task['current-step'] === 'transmitTravellingTickets'")
+      span.type.label.label-primary #{__('Transmit Travelling Tickets')}
+    .current-step(ng-if="$ctrl.task['current-step'] === 'hotelBooking'")
+      span.type.label.label-primary #{__('Needs Hotel Booking')}
 .lv-actions.actions
   a(href="", data-toggle="dropdown", aria-expanded="false")
     i.mdi.mdi-dots-vertical
   ul.dropdown-menu.dropdown-menu-right
     li
-      a(href="", esn-modal-launcher="/travel/app/delete/delete.html") #{__('Delete')}
+      a(href="", ng-click="$ctrl.approve()") #{__('Approve')}

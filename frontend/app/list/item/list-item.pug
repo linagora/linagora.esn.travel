@@ -4,7 +4,7 @@
   .col-md-5.col-xs-5.ellipsis
     .date From {{::$ctrl.travel["start-date"]}} to {{::$ctrl.travel["end-date"]}}
   .col-md-3.hidden-xs.lv-title
-    span {{::$ctrl.travel.state}}
+    span.type.label.label-primary {{::$ctrl.travel.state}}
 .lv-actions.actions
   a(href="", data-toggle="dropdown", aria-expanded="false")
     i.mdi.mdi-dots-vertical
