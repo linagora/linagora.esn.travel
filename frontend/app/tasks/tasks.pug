@@ -4,6 +4,6 @@
       .lv-body
         travel-task-item.lv-item.p-0.clickable(task='task', on-delete-btn-click="$ctrl.delete(task)", ng-repeat="task in $ctrl.tasks")
 .empty-message(ng-if="!$ctrl.tasks.length")
-  i.mdi.mdi-airplane
+  i.mdi.mdi-playlist-check
   .message
     | #{__('No tasks')}

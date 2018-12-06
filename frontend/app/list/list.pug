@@ -4,6 +4,6 @@
       .lv-body
         travel-list-item.lv-item.p-0.clickable(travel='travel', on-delete-btn-click="$ctrl.deletetravel(travel)", ng-repeat="travel in $ctrl.travels")
 .empty-message(ng-if="!$ctrl.travels.length")
-  i.mdi.mdi-airplane
+  i.mdi.mdi-wallet-travel
   .message
     | #{__('No travel')}
