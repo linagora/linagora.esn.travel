@@ -2,7 +2,7 @@
   .card(ng-if="$ctrl.travels.length > 0")
     .listview.lv-bordered.lv-lg
       .lv-body
-        travel-list-item.lv-item.p-0.clickable(travel='travel', on-delete-btn-click="$ctrl.deletetravel(travel)", ng-repeat="travel in $ctrl.travels")
+        travel-list-item.lv-item.p-0.clickable(travel='travel', on-details-click="$ctrl.onDetailsClick(travel)", ng-repeat="travel in $ctrl.travels")
 .empty-message(ng-if="!$ctrl.travels.length")
   i.mdi.mdi-wallet-travel
   .message

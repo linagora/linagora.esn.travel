@@ -14,6 +14,7 @@
 
     function $onInit() {
       self.onCreateBtnClick = onCreateBtnClick;
+      self.onDetailsClick = onDetailsClick;
 
       travelApiClient.list().then(function(travels) {
         self.travels = travels;
@@ -27,6 +28,21 @@
         placement: 'center',
         controllerAs: '$ctrl',
         controller: 'TravelCreateController'
+      });
+    }
+
+    function onDetailsClick(travel) {
+      $modal({
+        templateUrl: '/linagora.esn.travel/app/travel/travel.html',
+        backdrop: 'static',
+        placement: 'center',
+        controllerAs: '$ctrl',
+        controller: 'TravelController',
+        resolve: {
+          travel: function() {
+            return travel.clone();
+          }
+        }
       });
     }
   }

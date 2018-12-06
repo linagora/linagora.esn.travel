@@ -1,11 +1,8 @@
-.row.flex-vertical-centered(ui-sref=".display({ travelId: $ctrl.travel.id })")
+.row.flex-vertical-centered.clickable(ng-click="$ctrl.onDetailsClick({travel: $ctrl.travel})")
   .col-md-4.col-xs-6.lv-title.meta
     h5.ellipsis &#35;{{::$ctrl.travel["request-id"]}} - {{::$ctrl.travel["project-id"]}}
+  .col-md-5.col-xs-5.ellipsis
     .date From {{::$ctrl.travel["start-date"]}} to {{::$ctrl.travel["end-date"]}}
-  .col-md-5.col-xs-5.ellipsis.people
-    .for
-      span Traveller
-      a(ng-href='mailto:{{::$ctrl.travel.traveller}}', op-inbox-compose, title="{{::$ctrl.travel.traveller}}") {{::$ctrl.travel.traveller}}
   .col-md-3.hidden-xs.lv-title
     span {{::$ctrl.travel.state}}
 .lv-actions.actions
@@ -13,4 +10,4 @@
     i.mdi.mdi-dots-vertical
   ul.dropdown-menu.dropdown-menu-right
     li
-      a(href="", esn-modal-launcher="/travel/app/delete/delete.html") #{__('Delete')}
+      a(href="", ng-click="$ctrl.onDetailsClick({travel: $ctrl.travel})") #{__('Show details')}

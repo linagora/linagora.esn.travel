@@ -7,7 +7,7 @@
     templateUrl: '/linagora.esn.travel/app/list/item/list-item.html',
     bindings: {
       travel: '<',
-      onDeleteBtnClick: '&'
+      onDetailsClick: '&'
     }
   });
 })(angular);
