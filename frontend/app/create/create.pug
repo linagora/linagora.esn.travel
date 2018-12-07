@@ -29,10 +29,11 @@
               input.input.form-control(type='text', ng-model="$ctrl.travel.address", placeholder=__('Address'))
             .separator
           .form-group.flex-form-group.full-width
-            .field-name.field-label #{__('Road transport')}
-              label.travel-road.checkbox.checkbox-inline
-                input(type="checkbox", ng-model="$ctrl.travel.road")
-                i.input-helper
+            .field-name.field-label #{__('Travel mode')}
+            .fg-line
+              md-input-container
+                md-select(ng-model="$ctrl.travelMode")
+                  md-option(ng-value="mode" ng-repeat="mode in $ctrl.travelModes") {{ mode }}
 
         .modal-footer.flex
           .flex-vertical-centered.flex-end
