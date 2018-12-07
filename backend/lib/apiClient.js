@@ -2,8 +2,8 @@ const axios = require('axios');
 let client;
 
 module.exports = dependencies => {
-
   const logger = dependencies('logger');
+  const esnConfig = dependencies('esn-config');
 
   return {
     create,
@@ -21,19 +21,22 @@ module.exports = dependencies => {
       return Promise.resolve(client);
     }
 
-    return getServiceUrl().then(baseURL => axios.create({ baseURL }));
+    return getServiceUrl().then(baseURL => axios.create({ baseURL: `${baseURL}/api` }));
   }
 
   function getServiceUrl() {
-    // TODO: get from conf, fallback on mock
-    return Promise.resolve('http://localhost:8080/linagora.esn.travel');
+    if (process.env.PETALS_BASE_URL) {
+      return Promise.resolve(process.env.PETALS_BASE_URL);
+    }
+
+    return esnConfig('petalsURL').inModule('linagora.esn.travel').get().then(url => (url ? url : 'http://localhost:8080/linagora.esn.travel'));
   }
 
   function create(travel) {
     logger.debug('Creating travel request', JSON.stringify(travel));
 
     return getClient()
-      .then(client => client.post('/api/administrative-offices/travel-request', travel))
+      .then(client => client.post('/administrative-offices/travel-request', travel))
       .then(response => response.data);
   }
 
@@ -41,7 +44,7 @@ module.exports = dependencies => {
     logger.debug('List travel requests', userEmail);
 
     return getClient()
-      .then(client => client.get(`/api/process-instances/travel-requester/${userEmail}`))
+      .then(client => client.get(`/process-instances/travel-requester/${userEmail}`))
       .then(response => response.data);
   }
 
@@ -49,7 +52,7 @@ module.exports = dependencies => {
     logger.debug('List travel requests', userEmail);
 
     return getClient()
-      .then(client => client.get(`/api/tasks/tasks/${userEmail}`))
+      .then(client => client.get(`/tasks/tasks/${userEmail}`))
       .then(response => response.data);
   }
 
@@ -57,7 +60,7 @@ module.exports = dependencies => {
     logger.debug('manager approval', JSON.stringify(approval));
 
     return getClient()
-      .then(client => client.post(`/api/administrative-offices/travel-request/${id}/manager-approval`, approval))
+      .then(client => client.post(`/administrative-offices/travel-request/${id}/manager-approval`, approval))
       .then(response => response.data);
   }
 
@@ -65,7 +68,7 @@ module.exports = dependencies => {
     logger.debug('board approval', JSON.stringify(approval));
 
     return getClient()
-      .then(client => client.post(`/api/administrative-offices/travel-request/${id}/board-approval`, approval))
+      .then(client => client.post(`/administrative-offices/travel-request/${id}/board-approval`, approval))
       .then(response => response.data);
   }
 
@@ -73,7 +76,7 @@ module.exports = dependencies => {
     logger.debug('Book hotel', JSON.stringify(book));
 
     return getClient()
-      .then(client => client.post(`/api/administrative-offices/travel-request/${id}/hotel`, book))
+      .then(client => client.post(`/administrative-offices/travel-request/${id}/hotel`, book))
       .then(response => response.data);
   }
 
@@ -81,7 +84,7 @@ module.exports = dependencies => {
     logger.debug('Book tickets', JSON.stringify(book));
 
     return getClient()
-      .then(client => client.post(`/api/administrative-offices/travel-request/${id}/travelling-tickets`, book))
+      .then(client => client.post(`/administrative-offices/travel-request/${id}/travelling-tickets`, book))
       .then(response => response.data);
   }
 
@@ -89,7 +92,7 @@ module.exports = dependencies => {
     logger.debug('Transfert tickets', JSON.stringify(tickets));
 
     return getClient()
-      .then(client => client.put(`/api/administrative-offices/travel-request/${id}/travelling-tickets`, tickets))
+      .then(client => client.put(`/administrative-offices/travel-request/${id}/travelling-tickets`, tickets))
       .then(response => response.data);
   }
 };
