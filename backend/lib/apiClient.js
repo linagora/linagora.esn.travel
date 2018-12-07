@@ -25,7 +25,11 @@ module.exports = dependencies => {
         return Promise.resolve(process.env.PETALS_BASE_URL);
       }
 
-      return esnConfig('petalsURL').inModule('linagora.esn.travel').forUser(user, true).then(url => url || 'http://localhost:8080/linagora.esn.travel');
+      return esnConfig('petalsURL').inModule('linagora.esn.travel').forUser(user, true).then(url => {
+        logger.info('Client URL', url);
+
+        return url || 'http://localhost:8080/linagora.esn.travel';
+      });
     }
 
     function create(travel) {
