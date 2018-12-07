@@ -9,7 +9,7 @@
   function travelApplicationMenu(applicationMenuTemplateBuilder) {
     var directive = {
       restrict: 'E',
-      template: applicationMenuTemplateBuilder('/#/travel', 'mdi-emoticon-happy', 'Travel'),
+      template: applicationMenuTemplateBuilder('/#/travel', { url: '/linagora.esn.travel/images/app.png' }, 'Travel'),
       replace: true
     };
 

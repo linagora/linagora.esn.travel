@@ -58,6 +58,8 @@ const awesomeModule = new AwesomeModule(AWESOME_MODULE_NAME, {
 
       webserverWrapper.addApp(AWESOME_MODULE_NAME, app);
 
+      require('./backend/lib/config')(dependencies).register();
+
       return callback();
     }
   }
