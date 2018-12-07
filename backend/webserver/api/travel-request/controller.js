@@ -50,7 +50,7 @@ module.exports = dependencies => {
     const travel = req.body;
 
     travel.traveller = req.user.preferredEmail;
-    travel['has-road-transport'] = !!travel.road;
+    travel.enquirer = req.user.preferredEmail;
     travel['project-id'] = travel.projectId;
     travel['start-date'] = travel.start;
     travel['end-date'] = travel.end;
