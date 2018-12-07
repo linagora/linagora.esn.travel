@@ -27,6 +27,7 @@
     });
 
     function create() {
+      self.travel = self.travel || {};
       self.travel.transports = mockTransportData[self.travelMode];
 
       travelApiClient.create(self.travel).then(function() {
