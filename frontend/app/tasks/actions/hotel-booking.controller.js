@@ -7,7 +7,8 @@
   function TravelActionHotelBookingController(
     $log,
     task,
-    travelApiClient
+    travelApiClient,
+    notificationFactory
   ) {
     var self = this;
 
@@ -20,6 +21,7 @@
     function book() {
       travelApiClient.bookHotel(task['request-id']).then(function() {
         $log.debug('Hotel Booked');
+        notificationFactory.weakInfo('Travel', 'The hotel has been booked');
       }).catch(function(err) {
         $log.debug('Error while booking hotel', err);
       });

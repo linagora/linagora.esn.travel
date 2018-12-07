@@ -14,7 +14,7 @@
   angular.module('linagora.esn.travel')
     .controller('TravelCreateController', TravelCreateController);
 
-  function TravelCreateController(travelApiClient) {
+  function TravelCreateController(travelApiClient, notificationFactory) {
     var self = this;
 
     self.travelModes = ['Car', 'Plane', 'Train'];
@@ -30,7 +30,7 @@
       self.travel.transports = mockTransportData[self.travelMode];
 
       travelApiClient.create(self.travel).then(function() {
-        console.log('Created');
+        notificationFactory.weakInfo('Travel', 'Your travel request has been sent');
       });
     }
 
