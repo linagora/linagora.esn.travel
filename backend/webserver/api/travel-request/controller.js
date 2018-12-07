@@ -1,5 +1,6 @@
 module.exports = dependencies => {
   const client = require('../../../lib/apiClient')(dependencies);
+  const logger = dependencies('logger');
 
   return {
     get,
@@ -14,11 +15,35 @@ module.exports = dependencies => {
   };
 
   function list(req, res) {
-    client.list().then(travels => res.status(200).json(travels));
+    client.list(req.user.preferredEmail)
+      .then(travels => {
+        if (!travels || !travels['travel-requests'] || !travels['travel-requests']['travel-request']) {
+          return res.status(200).json([]);
+        }
+
+        return res.status(200).json(travels['travel-requests']['travel-request']);
+      })
+      .catch(err => {
+        logger.error('Error while getting travel requests', err);
+
+        return res.status(500).json({});
+      });
   }
 
   function listTasks(req, res) {
-    client.listTasks().then(tasks => res.status(200).json(tasks));
+    client.listTasks(req.user.preferredEmail)
+    .then(tasks => {
+      if (!tasks || !tasks['travel-requests'] || !tasks['travel-requests']['travel-request']) {
+        return res.status(200).json([]);
+      }
+
+      return res.status(200).json(tasks['travel-requests']['travel-request']);
+    })
+    .catch(err => {
+      logger.error('Error while getting travel requests', err);
+
+      return res.status(500).json({});
+    });
   }
 
   function create(req, res) {
@@ -30,7 +55,6 @@ module.exports = dependencies => {
     travel['start-date'] = travel.start;
     travel['end-date'] = travel.end;
 
-    //travel.enquirer = // manager
     client.create(travel)
       .then(created => res.status(201).json(created))
       .catch(err => {
@@ -48,7 +72,7 @@ module.exports = dependencies => {
 
     approval['approved-by'] = req.user.preferredEmail;
 
-    client.managerApproval(approval)
+    client.managerApproval(req.params.id, approval)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
@@ -65,7 +89,7 @@ module.exports = dependencies => {
 
     approval['approved-by'] = req.user.preferredEmail;
 
-    client.boardApproval(approval)
+    client.boardApproval(req.params.id, approval)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
@@ -82,7 +106,7 @@ module.exports = dependencies => {
       'booked-by': req.user.preferredEmail
     };
 
-    client.bookHotel(book)
+    client.bookHotel(req.params.id, book)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
@@ -99,7 +123,7 @@ module.exports = dependencies => {
       'booked-by': req.user.preferredEmail
     };
 
-    client.bookTickets(book)
+    client.bookTickets(req.params.id, book)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
@@ -116,7 +140,7 @@ module.exports = dependencies => {
       'transmitted-by': req.user.preferredEmail
     };
 
-    client.transfertTickets(book)
+    client.transfertTickets(req.params.id, book)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({

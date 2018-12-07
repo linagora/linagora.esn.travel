@@ -1,91 +1,9 @@
-const travels = {
-  'travel-requests': {
-    'travel-request': [
-      {
-        'request-id': '159',
-        state: 'active',
-        'manager-approval': 'true',
-        'board-approval': 'true',
-        'reject-reason': null,
-
-        enquirer: 'user1@open-paas.org',
-        traveller: 'user2@open-paas.org',
-        'project-id': '14592-05',
-        'start-date': '2018-11-19',
-        'end-date': '2018-11-22',
-        address: '107, rue du Landreau, Nantes'
-      },
-      {
-        'request-id': '150',
-        state: 'active',
-        'manager-approval': 'true',
-        'board-approval': 'true',
-        'reject-reason': null,
-
-        enquirer: 'user3@open-paas.org',
-        traveller: 'user2@open-paas.org',
-        'project-id': '14592-05',
-        'start-date': '2018-11-25',
-        'end-date': '2018-11-28',
-        address: 'Montpellier'
-      }
-    ]
-  }
-};
-
-const tasks = {
-  'travel-requests': {
-    'travel-request': [
-      {
-        'request-id': '222',
-        'project-id': '14592-05',
-        enquirer: 'user2@open-paas.org',
-        traveller: 'user1@open-paas.org',
-        'start-date': '2018-11-19T00:00:00.000+01:00',
-        'end-date': '2018-11-22T00:00:00.000+01:00',
-        'current-step': 'manager-validation'
-      },
-      {
-        'request-id': '222',
-        'project-id': '14592-05',
-        enquirer: 'user2@open-paas.org',
-        traveller: 'user1@open-paas.org',
-        'start-date': '2018-11-19T00:00:00.000+01:00',
-        'end-date': '2018-11-22T00:00:00.000+01:00',
-        'current-step': 'board-validation'
-      },
-      {
-        'request-id': '222',
-        'project-id': '14592-05',
-        enquirer: 'user2@open-paas.org',
-        traveller: 'user1@open-paas.org',
-        'start-date': '2018-11-19T00:00:00.000+01:00',
-        'end-date': '2018-11-22T00:00:00.000+01:00',
-        'current-step': 'transportBooking'
-      },
-      {
-        'request-id': '222',
-        'project-id': '14592-05',
-        enquirer: 'user2@open-paas.org',
-        traveller: 'user1@open-paas.org',
-        'start-date': '2018-11-19T00:00:00.000+01:00',
-        'end-date': '2018-11-22T00:00:00.000+01:00',
-        'current-step': 'transmitTravellingTickets'
-      },
-      {
-        'request-id': '222',
-        'project-id': '14592-05',
-        enquirer: 'user2@open-paas.org',
-        traveller: 'user1@open-paas.org',
-        'start-date': '2018-11-19T00:00:00.000+01:00',
-        'end-date': '2018-11-22T00:00:00.000+01:00',
-        'current-step': 'hotelBooking'
-      }
-    ]
-  }
-};
+const axios = require('axios');
+let client;
 
 module.exports = dependencies => {
+
+  const logger = dependencies('logger');
 
   return {
     create,
@@ -98,35 +16,80 @@ module.exports = dependencies => {
     transfertTickets
   };
 
+  function getClient() {
+    if (client) {
+      return Promise.resolve(client);
+    }
+
+    return getServiceUrl().then(baseURL => axios.create({ baseURL }));
+  }
+
+  function getServiceUrl() {
+    // TODO: get from conf, fallback on mock
+    return Promise.resolve('http://localhost:8080/linagora.esn.travel');
+  }
+
   function create(travel) {
-    return Promise.resolve(travel);
+    logger.debug('Creating travel request', JSON.stringify(travel));
+
+    return getClient()
+      .then(client => client.post('/api/administrative-offices/travel-request', travel))
+      .then(response => response.data);
   }
 
-  function list() {
-    return Promise.resolve(travels['travel-requests']['travel-request']);
+  function list(userEmail) {
+    logger.debug('List travel requests', userEmail);
+
+    return getClient()
+      .then(client => client.get(`/api/process-instances/travel-requester/${userEmail}`))
+      .then(response => response.data);
   }
 
-  function listTasks() {
-    return Promise.resolve(tasks['travel-requests']['travel-request']);
+  function listTasks(userEmail) {
+    logger.debug('List travel requests', userEmail);
+
+    return getClient()
+      .then(client => client.get(`/api/tasks/tasks/${userEmail}`))
+      .then(response => response.data);
   }
 
-  function managerApproval(approval) {
-    return Promise.resolve(approval);
+  function managerApproval(id, approval) {
+    logger.debug('manager approval', JSON.stringify(approval));
+
+    return getClient()
+      .then(client => client.post(`/api/administrative-offices/travel-request/${id}/manager-approval`, approval))
+      .then(response => response.data);
   }
 
-  function boardApproval(approval) {
-    return Promise.resolve(approval);
+  function boardApproval(id, approval) {
+    logger.debug('board approval', JSON.stringify(approval));
+
+    return getClient()
+      .then(client => client.post(`/api/administrative-offices/travel-request/${id}/board-approval`, approval))
+      .then(response => response.data);
   }
 
-  function bookHotel(book) {
-    return Promise.resolve(book);
+  function bookHotel(id, book) {
+    logger.debug('Book hotel', JSON.stringify(book));
+
+    return getClient()
+      .then(client => client.post(`/api/administrative-offices/travel-request/${id}/hotel`, book))
+      .then(response => response.data);
   }
 
-  function bookTickets(book) {
-    return Promise.resolve(book);
+  function bookTickets(id, book) {
+    logger.debug('Book tickets', JSON.stringify(book));
+
+    return getClient()
+      .then(client => client.post(`/api/administrative-offices/travel-request/${id}/travelling-tickets`, book))
+      .then(response => response.data);
   }
 
-  function transfertTickets(tickets) {
-    return Promise.resolve(tickets);
+  function transfertTickets(id, tickets) {
+    logger.debug('Transfert tickets', JSON.stringify(tickets));
+
+    return getClient()
+      .then(client => client.put(`/api/administrative-offices/travel-request/${id}/travelling-tickets`, tickets))
+      .then(response => response.data);
   }
 };

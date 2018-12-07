@@ -71,7 +71,7 @@
 
     function transfertTickets(id) {
       return travelRestangular.one('travel-request', id)
-        .all('travelling-tickets').customPOST().then(_pluck);
+        .all('travelling-tickets').customPUT().then(_pluck);
     }
 
     function bookHotel(id) {
