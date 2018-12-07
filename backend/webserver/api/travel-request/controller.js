@@ -15,7 +15,7 @@ module.exports = dependencies => {
   };
 
   function list(req, res) {
-    client.list(req.user.preferredEmail)
+    client(req.user).list(req.user.preferredEmail)
       .then(travels => {
         if (!travels || !travels['travel-requests'] || !travels['travel-requests']['travel-request']) {
           return res.status(200).json([]);
@@ -31,7 +31,7 @@ module.exports = dependencies => {
   }
 
   function listTasks(req, res) {
-    client.listTasks(req.user.preferredEmail)
+    client(req.user).listTasks(req.user.preferredEmail)
     .then(tasks => {
       if (!tasks || !tasks['travel-requests'] || !tasks['travel-requests']['travel-request']) {
         return res.status(200).json([]);
@@ -55,7 +55,7 @@ module.exports = dependencies => {
     travel['start-date'] = travel.start;
     travel['end-date'] = travel.end;
 
-    client.create(travel)
+    client(req.user).create(travel)
       .then(created => res.status(201).json(created))
       .catch(err => {
         res.status(500).json({
@@ -72,7 +72,7 @@ module.exports = dependencies => {
 
     approval['approved-by'] = req.user.preferredEmail;
 
-    client.managerApproval(req.params.id, approval)
+    client(req.user).managerApproval(req.params.id, approval)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
@@ -89,7 +89,7 @@ module.exports = dependencies => {
 
     approval['approved-by'] = req.user.preferredEmail;
 
-    client.boardApproval(req.params.id, approval)
+    client(req.user).boardApproval(req.params.id, approval)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
@@ -106,7 +106,7 @@ module.exports = dependencies => {
       'booked-by': req.user.preferredEmail
     };
 
-    client.bookHotel(req.params.id, book)
+    client(req.user).bookHotel(req.params.id, book)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
@@ -123,7 +123,7 @@ module.exports = dependencies => {
       'booked-by': req.user.preferredEmail
     };
 
-    client.bookTickets(req.params.id, book)
+    client(req.user).bookTickets(req.params.id, book)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
@@ -140,7 +140,7 @@ module.exports = dependencies => {
       'transmitted-by': req.user.preferredEmail
     };
 
-    client.transfertTickets(req.params.id, book)
+    client(req.user).transfertTickets(req.params.id, book)
       .then(() => res.status(202).send())
       .catch(err => {
         res.status(500).json({
