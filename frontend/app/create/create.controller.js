@@ -14,7 +14,7 @@
   angular.module('linagora.esn.travel')
     .controller('TravelCreateController', TravelCreateController);
 
-  function TravelCreateController(travelApiClient, notificationFactory) {
+  function TravelCreateController($rootScope, travelApiClient, notificationFactory) {
     var self = this;
 
     self.travelModes = ['Car', 'Plane', 'Train'];
@@ -32,6 +32,7 @@
 
       travelApiClient.create(self.travel).then(function() {
         notificationFactory.weakInfo('Travel', 'Your travel request has been sent');
+        $rootScope.$broadcast('travel:request:created', self.travel);
       });
     }
 

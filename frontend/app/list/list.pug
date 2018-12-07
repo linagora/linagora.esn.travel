@@ -1,11 +1,14 @@
-.fadeIn200ms
+.fadeIn200ms(ng-if="!$ctrl.loading")
   .card(ng-if="$ctrl.travels.length > 0")
     .listview.lv-bordered.lv-lg
       .lv-body
         travel-list-item.lv-item.p-0.clickable(travel='travel', on-details-click="$ctrl.onDetailsClick(travel)", ng-repeat="travel in $ctrl.travels")
-.empty-message(ng-if="!$ctrl.travels.length")
+.empty-message(ng-if="!$ctrl.loading && !$ctrl.travels.length")
   i.mdi.mdi-wallet-travel
   .message
     | #{__('No travel')}
+
+div(ng-if="$ctrl.loading")
+  .text-center(openpaas-logo-spinner, spinner-start-active='1', spinner-size='0.5')
 
 fab(icon="plus", ng-click="$ctrl.onCreateBtnClick()")

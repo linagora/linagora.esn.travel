@@ -5,6 +5,8 @@
     .controller('TravelListController', TravelListController);
 
   function TravelListController(
+    $scope,
+    $timeout,
     $modal,
     travelApiClient
   ) {
@@ -16,8 +18,20 @@
       self.onCreateBtnClick = onCreateBtnClick;
       self.onDetailsClick = onDetailsClick;
 
+      $scope.$on('travel:request:created', function() {
+        self.travels = [];
+        $timeout(loadList, 0);
+      });
+
+      loadList();
+    }
+
+    function loadList() {
+      self.loading = true;
       travelApiClient.list().then(function(travels) {
         self.travels = travels;
+      }).finally(function() {
+        self.loading = false;
       });
     }
 

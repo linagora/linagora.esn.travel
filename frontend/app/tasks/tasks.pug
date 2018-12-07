@@ -1,9 +1,12 @@
-.fadeIn200ms
+.fadeIn200ms(ng-if="!$ctrl.loading")
   .card(ng-if="$ctrl.tasks.length > 0")
     .listview.lv-bordered.lv-lg
       .lv-body
         travel-task-item.lv-item.p-0.clickable(task='task', on-task-click="$ctrl.onTaskClick()" ng-repeat="task in $ctrl.tasks")
-.empty-message(ng-if="!$ctrl.tasks.length")
+.empty-message(ng-if="!$ctrl.loading && !$ctrl.tasks.length")
   i.mdi.mdi-playlist-check
   .message
     | #{__('No tasks')}
+
+div(ng-if="$ctrl.loading")
+  .text-center(openpaas-logo-spinner, spinner-start-active='1', spinner-size='0.5')

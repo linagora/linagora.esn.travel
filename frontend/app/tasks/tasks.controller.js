@@ -12,8 +12,15 @@
     self.$onInit = $onInit;
 
     function $onInit() {
+      loadList();
+    }
+
+    function loadList() {
+      self.loading = true;
       travelApiClient.listTasks().then(function(tasks) {
         self.tasks = tasks;
+      }).finally(function() {
+        self.loading = false;
       });
     }
   }
