@@ -6,6 +6,7 @@
 
   function TravelActionHotelBookingController(
     $log,
+    $rootScope,
     task,
     travelApiClient,
     notificationFactory
@@ -24,6 +25,8 @@
         notificationFactory.weakInfo('Travel', 'The hotel has been booked');
       }).catch(function(err) {
         $log.debug('Error while booking hotel', err);
+      }).finally(function() {
+        $rootScope.$broadcast('travel:tasks:updated', self.travel);
       });
     }
   }

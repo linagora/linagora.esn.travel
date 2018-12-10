@@ -6,6 +6,7 @@
 
   function TravelActionTicketTransmissionController(
     $log,
+    $rootScope,
     task,
     travelApiClient,
     notificationFactory
@@ -24,6 +25,8 @@
         notificationFactory.weakInfo('Travel', 'The travel tickets have been transferred');
       }).catch(function(err) {
         $log.debug('Error while transferring tickets', err);
+      }).finally(function() {
+        $rootScope.$broadcast('travel:tasks:updated', self.travel);
       });
     }
   }

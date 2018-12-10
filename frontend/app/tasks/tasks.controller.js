@@ -5,7 +5,9 @@
     .controller('TravelTasksController', TravelTasksController);
 
   function TravelTasksController(
-    travelApiClient
+    travelApiClient,
+    $timeout,
+    $scope
   ) {
     var self = this;
 
@@ -13,6 +15,11 @@
 
     function $onInit() {
       loadList();
+
+      $scope.$on('travel:tasks:updated', function() {
+        self.tasks = [];
+        $timeout(loadList, 0);
+      });
     }
 
     function loadList() {

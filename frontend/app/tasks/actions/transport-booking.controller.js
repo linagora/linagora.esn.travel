@@ -5,6 +5,7 @@
     .controller('TravelActionTransportBookingController', TravelActionTransportBookingController);
 
   function TravelActionTransportBookingController(
+    $rootScope,
     $log,
     task,
     travelApiClient,
@@ -24,6 +25,8 @@
         notificationFactory.weakInfo('Travel', 'The travel tickets have been booked');
       }).catch(function(err) {
         $log.debug('Error while booking tickets', err);
+      }).finally(function() {
+        $rootScope.$broadcast('travel:tasks:updated', self.travel);
       });
     }
   }

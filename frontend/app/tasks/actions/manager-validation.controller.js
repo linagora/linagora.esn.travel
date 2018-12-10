@@ -8,6 +8,7 @@
     task,
     travelApiClient,
     $log,
+    $rootScope,
     notificationFactory
   ) {
     var self = this;
@@ -22,6 +23,8 @@
         notificationFactory.weakInfo('Travel', 'The travel request has been validated');
       }).catch(function(err) {
         $log.debug('Error while validating', err);
+      }).finally(function() {
+        $rootScope.$broadcast('travel:tasks:updated', self.travel);
       });
     }
 
@@ -31,7 +34,10 @@
         notificationFactory.weakInfo('Travel', 'The travel request has been rejected');
       }).catch(function(err) {
         $log.debug('Error while rejecting', err);
-      });    }
+      }).finally(function() {
+        $rootScope.$broadcast('travel:tasks:updated', self.travel);
+      });
+    }
 
     function $onInit() {
     }
