@@ -4,8 +4,7 @@
   .col-xs-4.lv-title
     h5.ellipsis &#35;{{::$ctrl.task["request-id"]}} - {{::$ctrl.task["project-id"]}}
   .col-xs-4.ellipsis.p-0
-    a(ng-href='mailto:{{::$ctrl.task.enquirer}}', op-inbox-compose, title="{{::$ctrl.task.enquirer}}")
-      | {{::$ctrl.task.enquirer}}
+    .date From {{ ::$ctrl.task["start-date"] | amDateFormat:'YYYY/MM/DD' }} to {{ ::$ctrl.task["end-date"] | amDateFormat:'YYYY/MM/DD' }}
   .col-xs-4.lv-title.ellipsis
     .current-step(ng-if="$ctrl.task['current-step'] === 'manager-validation'")
       span.type.label.label-primary #{__('Under management validation')}
@@ -21,6 +20,8 @@
   a(href="", data-toggle="dropdown", aria-expanded="false")
     i.mdi.mdi-dots-vertical
   ul.dropdown-menu.dropdown-menu-right
+    li
+      a(href="", ng-click="$ctrl.onTaskClick()") #{__('Show details')}
     li(ng-if="$ctrl.task['current-step'] === 'manager-validation'")
       a(href="", ng-click="$ctrl.managerValidation()") #{__('Validate')}
     li(ng-if="$ctrl.task['current-step'] === 'board-validation'")

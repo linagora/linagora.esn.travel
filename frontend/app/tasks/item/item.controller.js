@@ -3,7 +3,7 @@
 
   angular.module('linagora.esn.travel').controller('TravelTaskItemController', TravelTaskItemController);
 
-  function TravelTaskItemController(travelTasksService) {
+  function TravelTaskItemController($modal, travelTasksService) {
     var self = this;
 
     self.$onInit = $onInit;
@@ -12,8 +12,24 @@
     self.bookHotel = bookHotel;
     self.bookTransport = bookTransport;
     self.transmitTravellingTickets = transmitTravellingTickets;
+    self.onTaskClick = onTaskClick;
 
     function $onInit() {
+    }
+
+    function onTaskClick() {
+      $modal({
+        templateUrl: '/linagora.esn.travel/app/travel/travel.html',
+        backdrop: 'static',
+        placement: 'center',
+        controllerAs: '$ctrl',
+        controller: 'TravelController',
+        resolve: {
+          travel: function() {
+            return self.task.clone();
+          }
+        }
+      });
     }
 
     function managerValidation() {

@@ -5,7 +5,7 @@
         .modal-header
           button.close(type="button", data-dismiss="modal", aria-label="Close", ng-click="$hide()")
             span(aria-hidden="true") &times;
-          h4.modal-title #{__('Travel details')}
+          h4.modal-title #{__('Travel details for')} {{:: $ctrl.travel.traveller || $ctrl.travel.traveler}}
         .modal-body
           .approvals
             span.type.label.label-success(ng-if="$ctrl.travel['manager-approval'] !== null && $ctrl.travel['manager-approval']") #{__('Manager')}

@@ -43,6 +43,7 @@ const tasks = {
         traveller: 'user1@open-paas.org',
         'start-date': '2018-11-19T00:00:00.000+01:00',
         'end-date': '2018-11-22T00:00:00.000+01:00',
+        address: '107, rue du Landreau, Nantes',
         'current-step': 'manager-validation'
       },
       {
@@ -52,6 +53,7 @@ const tasks = {
         traveller: 'user1@open-paas.org',
         'start-date': '2018-11-19T00:00:00.000+01:00',
         'end-date': '2018-11-22T00:00:00.000+01:00',
+        address: '107, rue du Landreau, Nantes',
         'current-step': 'board-validation'
       },
       {
@@ -61,6 +63,7 @@ const tasks = {
         traveller: 'user1@open-paas.org',
         'start-date': '2018-11-19T00:00:00.000+01:00',
         'end-date': '2018-11-22T00:00:00.000+01:00',
+        address: '107, rue du Landreau, Nantes',
         'current-step': 'transportBooking'
       },
       {
@@ -70,6 +73,7 @@ const tasks = {
         traveller: 'user1@open-paas.org',
         'start-date': '2018-11-19T00:00:00.000+01:00',
         'end-date': '2018-11-22T00:00:00.000+01:00',
+        address: '107, rue du Landreau, Nantes',
         'current-step': 'transmitTravellingTickets'
       },
       {
@@ -79,6 +83,7 @@ const tasks = {
         traveller: 'user1@open-paas.org',
         'start-date': '2018-11-19T00:00:00.000+01:00',
         'end-date': '2018-11-22T00:00:00.000+01:00',
+        address: 'Montpellier',
         'current-step': 'hotelBooking'
       }
     ]
