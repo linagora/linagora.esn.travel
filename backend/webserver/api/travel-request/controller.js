@@ -21,7 +21,9 @@ module.exports = dependencies => {
           return res.status(200).json([]);
         }
 
-        return res.status(200).json(travels['travel-requests']['travel-request']);
+        const requests = travels['travel-requests']['travel-request'];
+
+        Array.isArray(requests) ? res.status(200).json(requests) : res.status(200).json([requests]);
       })
       .catch(err => {
         logger.error('Error while getting travel requests', err);
@@ -37,7 +39,9 @@ module.exports = dependencies => {
         return res.status(200).json([]);
       }
 
-      return res.status(200).json(tasks['travel-requests']['travel-request']);
+      const requests = tasks['travel-requests']['travel-request'];
+
+      Array.isArray(requests) ? res.status(200).json(requests) : res.status(200).json([requests]);
     })
     .catch(err => {
       logger.error('Error while getting travel requests', err);
