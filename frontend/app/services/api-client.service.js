@@ -36,12 +36,12 @@
     function getProjects() {
       return $q.when([
         {
-          id: '1',
-          name: 'OpenPaaS - 92001'
+          id: '22056-01',
+          name: 'Ministère de la Justice - Audit ActiveMQ'
         },
         {
-          id: '2',
-          name: 'Petals - 92002'
+          id: '14592-05',
+          name: 'CD35 - Dev Processus Facture/Service Fait'
         }
       ]);
     }
