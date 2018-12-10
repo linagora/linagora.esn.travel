@@ -12,7 +12,7 @@
             .fg-line
               md-input-container
                 md-select(required, ng-model="$ctrl.travel.projectId")
-                  md-option(ng-value="project.id" ng-repeat="project in $ctrl.projects") {{ project.name }}
+                  md-option(ng-value="project.id" ng-repeat="project in $ctrl.projects") {{ project.id }} - {{ project.name }}
           .form-group.flex-form-group.full-width
             .field-name.field-label #{__('Start date')}
             .fg-line
