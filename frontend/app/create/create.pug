@@ -11,28 +11,28 @@
             .field-name.field-label #{__('Project')}
             .fg-line
               md-input-container
-                md-select(ng-model="$ctrl.travel.projectId")
+                md-select(required, ng-model="$ctrl.travel.projectId")
                   md-option(ng-value="project.id" ng-repeat="project in $ctrl.projects") {{ project.name }}
           .form-group.flex-form-group.full-width
             .field-name.field-label #{__('Start date')}
             .fg-line
-              input.input.form-control.from-date(type='text', ng-model="$ctrl.travel.start", autoclose="1", start-week="1", date-format="yyyy/MM/dd", placeholder=__('Start date'), ng-change="ctrl.onStartDateChange()", bs-datepicker)
+              input.input.form-control.from-date(required, type='text', ng-model="$ctrl.travel.start", autoclose="1", start-week="1", date-format="yyyy/MM/dd", placeholder=__('Start date'), ng-change="ctrl.onStartDateChange()", bs-datepicker)
             .separator
           .form-group.flex-form-group.full-width
             .field-name.field-label #{__('End date')}
             .fg-line
-              input.input.form-control.to-date(type='text', ng-model="$ctrl.travel.end", autoclose="1", start-week="1", date-format="yyyy/MM/dd", placeholder=__('End date'), ng-change="ctrl.onEndDateChange()", bs-datepicker)
+              input.input.form-control.to-date(required, type='text', ng-model="$ctrl.travel.end", autoclose="1", start-week="1", date-format="yyyy/MM/dd", placeholder=__('End date'), ng-change="ctrl.onEndDateChange()", bs-datepicker)
             .separator
           .form-group.flex-form-group.full-width
             .field-name.field-label #{__('Address')}
             .fg-line
-              input.input.form-control(type='text', ng-model="$ctrl.travel.address", placeholder=__('Address'))
+              input.input.form-control(required, type='text', ng-model="$ctrl.travel.address", placeholder=__('Address'))
             .separator
           .form-group.flex-form-group.full-width
             .field-name.field-label #{__('Travel mode')}
             .fg-line
               md-input-container
-                md-select(ng-model="$ctrl.travelMode")
+                md-select(required, ng-model="$ctrl.travelMode")
                   md-option(ng-value="mode" ng-repeat="mode in $ctrl.travelModes") {{ mode }}
 
         .modal-footer.flex
