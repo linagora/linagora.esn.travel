@@ -7,6 +7,11 @@
             span(aria-hidden="true") &times;
           h4.modal-title #{__('Travel details')}
         .modal-body
+          .approvals
+            span.type.label.label-success(ng-if="$ctrl.travel['manager-approval'] !== null && $ctrl.travel['manager-approval']") #{__('Manager')}
+            span.type.label.label-warning(ng-if="$ctrl.travel['manager-approval'] !== null && !$ctrl.travel['manager-approval']") #{__('Manager')}
+            span.type.label.label-success(ng-if="$ctrl.travel['manager-approval'] !== null && $ctrl.travel['board-approval']") #{__('Board')}
+            span.type.label.label-warning(ng-if="$ctrl.travel['manager-approval'] !== null && !$ctrl.travel['board-approval']") #{__('Board')}
           .form-group.flex-form-group.full-width
             .field-name.field-label #{__('Project')}
             .fg-line
