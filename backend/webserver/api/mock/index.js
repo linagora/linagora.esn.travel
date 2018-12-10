@@ -11,8 +11,8 @@ const travels = {
         enquirer: 'user1@open-paas.org',
         traveller: 'user2@open-paas.org',
         'project-id': '14592-05',
-        'start-date': '2018-11-19',
-        'end-date': '2018-11-22',
+        'start-date': '2018-11-19T00:00:00.000Z',
+        'end-date': '2018-11-22T00:00:00.000Z',
         address: '107, rue du Landreau, Nantes'
       },
       {
@@ -25,8 +25,8 @@ const travels = {
         enquirer: 'user3@open-paas.org',
         traveller: 'user2@open-paas.org',
         'project-id': '14592-05',
-        'start-date': '2018-11-25',
-        'end-date': '2018-11-28',
+        'start-date': '2018-11-25T00:00:00.000Z',
+        'end-date': '2018-11-28T00:00:00.000Z',
         address: 'Montpellier'
       }
     ]

@@ -2,7 +2,7 @@
   .col-md-4.col-xs-6.lv-title.meta
     h5.ellipsis &#35;{{::$ctrl.travel["request-id"]}} - {{::$ctrl.travel["project-id"]}}
   .col-md-5.col-xs-5.ellipsis
-    .date From {{::$ctrl.travel["start-date"]}} to {{::$ctrl.travel["end-date"]}}
+    .date From {{ ::$ctrl.travel["start-date"] | amDateFormat:'YYYY/MM/DD' }} to {{ ::$ctrl.travel["end-date"] | amDateFormat:'YYYY/MM/DD' }}
   .col-md-3.hidden-xs.lv-title
     span.type.label.label-primary {{::$ctrl.travel.state}}
 .lv-actions.actions
